@@ -1,4 +1,3 @@
-![Banner Eliana Diniz](https://github.com/Dinizasilva/Dinizasilva/blob/main/banner.png)
 
 👋 Sobre mim
 
