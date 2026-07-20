@@ -1,5 +1,8 @@
-![Banner Eliana Diniz](https://raw.githubusercontent.com/Dinizasilva/Dinizasilva/main/IMG_9953.PNG) 
-👋 Sobre mim
+<p align="center">
+<img src="https://raw.githubusercontent.com/Dinizasilva/Dinizasilva/main/IMG_9953.PNG" alt="Banner Eliana Diniz" width="950">
+</p>
+
+<h2 align="center">👋 Sobre mim</h2>
 
 Não sou a analista que simplesmente entrega relatórios que ficam sem leitura; eu entrego relatórios, soluções e direcionamentos que a gestão consulta antes de tomar decisões críticas.Com sólida experiência como Analista de Dados, e foco especializado em Cibersegurança e Inteligência Artificial, atuo na fronteira onde a complexidade técnica se transforma em clareza comercial.Minha expertise não reside apenas em manipular logs ou treinar modelos, mas em responder às perguntas que definem o futuro da operação.
 
