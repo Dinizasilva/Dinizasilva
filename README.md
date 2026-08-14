@@ -2,149 +2,92 @@
 <img src="https://raw.githubusercontent.com/Dinizasilva/Dinizasilva/main/IMG_9953.PNG" alt="Banner Eliana Diniz" width="550">
 </p>
 
-<h2 align="center">👋 Sobre mim</h2>
+<div align="center">
+👋 E aí, sou a Eliana
+Analista de Dados → Cloud Engineering
+Finalizando AWS re/Start e me preparando pra certificação
 
 
 
 
-Olá, sou **Eliana Diniz**.
 
-Sou **Analista de Dados** com experiência em **Python, SQL, Snowflake e Power BI**, atualmente construindo minha transição profissional para **Cloud Engineering**.
+</div>
 
-Estou concluindo o **AWS re/Start**, me preparando para a **certificação AWS** e aprofundando meus conhecimentos em **AWS Cloud, Terraform e Infrastructure as Code**.
+## Sobre essa transição
 
-Tenho interesse em construir soluções Cloud **seguras, escaláveis, resilientes e automatizadas**, unindo minha experiência em Dados à infraestrutura e aos serviços de Cloud.
+Trabalhei anos com dados — Python, SQL, Snowflake, Power BI. Sempre que precisava de uma infraestrutura nova, tinha que esperar alguém provisionar. Foi aí que pensei: "por que eu mesma não aprendo a fazer isso?"
+Então entrei no AWS re/Start. E aqui estou, no final do curso, com as mãos sujas de console AWS, quebrando a cabeça com IAM policies e finalmente entendendo por que aquele Security Group não deixava a porta 22 abrir.
+Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutura Cloud. Construir coisas que funcionem, que sejam seguras e que eu sabia exatamente como montar do zero.
 
----
+## O que eu já fiz na AWS (de verdade)
+Não é teoria. É console aberto, instância subindo, erro aparecendo e eu resolvendo.
 
-### ☁️ Cloud & AWS
+## Lab: EC2 + EBS + Snapshots
 
-Atualmente, desenvolvo conhecimentos práticos em:
+O que fiz: Subi uma instância EC2 na região us-east-1, anexei um volume EBS, configurei snapshots automáticos e testei recuperação de dados após "simular" uma falha (li o volume errado de propósito — aprendi na marra).
+Serviços: EC2 | EBS | IAM (role para acesso ao S3)
+O que deu errado: Esqueci de adicionar a role de IAM na instância antes de subir. Tive que criar outra. Agora eu leio duas vezes antes de clicar em "Launch".
 
-* AWS
-* EC2
-* S3
-* EBS
-* IAM
-* VPC
-* CloudWatch
-* SNS
-* EventBridge
-* AWS Config
-* Auto Scaling
-* Alta disponibilidade
-* Observabilidade
-* Segurança em Cloud
+## Lab: VPC, Subnets e Security Groups
+O que fiz: Criei uma VPC do zero com subnets pública e privada. Configurei um Security Group que só permite SSH da minha máquina (IP específico, não 0.0.0.0/0 — aprendi que isso é burrice logo no primeiro dia).
+Serviços: VPC | Subnets | Route Tables | Internet Gateway | Security Groups
+O que deu errado: A instância na subnet privada não tinha acesso à internet. Demorei 40 minutos pra perceber que a Route Table não estava associada. Foi um tapa na cara que me ensinou mais do que qualquer slide.
 
----
+## Lab: Observabilidade com CloudWatch + SNS + EventBridge
 
-### 🏗️ Infrastructure as Code
+O que fiz: Configurei métricas no CloudWatch para monitorar CPU de duas instâncias EC2. Criei alarmes que disparam notificações por SNS (e-mail) quando a CPU passa de 80%. Usei EventBridge para capturar eventos de parada/terminação de instâncias.
+Serviços: CloudWatch | SNS | EventBridge | EC2
+O que deu errado: O alarme do CloudWatch não disparava. Descobri que a métrica estava configurada para "Average" em 5 minutos, mas eu estava fazendo o teste em 30 segundos. Mudei para "High Resolution" e funcionou. Detalhe mata.
 
-Estou estudando **Terraform** para provisionamento e gerenciamento de infraestrutura como código.
+## Lab: S3 — Versionamento, Lifecycle e Políticas
 
-Meu objetivo é desenvolver uma abordagem baseada em:
+O que fiz: Criei buckets com versionamento ativado, configurei políticas de lifecycle para mover objetos antigos para Glacier e bloqueei acesso público com Bucket Policies. Testei upload, download e recuperação de versões antigas.
+Serviços: S3 | IAM | AWS Config
+O que deu errado: Tentei acessar um objeto privado pela URL pública. Obviamente deu 403. Foi aí que entendi a diferença entre ACL, Bucket Policy e IAM Policy na prática.
 
-**Infrastructure as Code → Automação → Versionamento → Escalabilidade**
+## Lab: Auto Scaling + Alta Disponibilidade
 
----
+O que fiz: Configurei um Auto Scaling Group com Launch Template, defini políticas de escala baseadas em CPU e distribuí as instâncias em múltiplas Availability Zones. Testei o stress da aplicação e vi as instâncias subirem sozinhas.
+Serviços: EC2 Auto Scaling | CloudWatch | ALB | VPC
+O que deu errado: O Load Balancer não distribuía o tráfego. As instâncias estavam em subnets privadas sem NAT Gateway. O health check falhava e o ASG ficava criando e destruindo instâncias em loop. Pânico por 20 minutos, depois paz.
 
-### 📊 Dados & Analytics
+## Lab: Cloud Security e Compliance (AWS Config)
 
-Minha experiência profissional é construída sobre análise e interpretação de dados.
+O que fiz: Ativei o AWS Config para monitorar conformidade dos recursos. Criei regras para verificar se buckets S3 estão criptografados, se Security Groups não têm portas abertas demais e se EBS volumes estão criptografados.
+Serviços: AWS Config | CloudTrail | IAM
+O que aprendi: Compliance não é só "clicar em enable". Você precisa entender o que está sendo monitorado e por quê. Criei um dashboard no Config para visualizar recursos não conformes de um jeito só meu.
 
-### Tecnologias
+## Infrastructure as Code
 
-* Python
-* SQL
-* Snowflake
-* Power BI
+Estou começando a traduzir esses labs para Terraform. A ideia é: se eu consigo criar no console, eu consigo criar em código.
+O que já estou fazendo:
+Módulos básicos de EC2 + VPC
+Variáveis e outputs organizados
+State remoto no S3 (com locking no DynamoDB — porque aprendi que perder state é perder tudo)
+Repositório de Terraform em construção 🚧
 
-Utilizo dados para transformar informações complexas em **indicadores, análises e insights que apoiam a tomada de decisão**.
+## A bagagem que eu trago de Dados
 
-Essa experiência também fortalece minha transição para Cloud, especialmente em cenários envolvendo **dados, infraestrutura e serviços AWS**.
+Antes de tudo isso, eu já trabalhava com:
+Python — automação de ETL, scripts de limpeza, análise exploratória
+SQL — consultas complexas, otimização de queries, modelagem dimensional
+Snowflake — data warehousing, pipelines, gestão de custos de compute
+Power BI — dashboards que realmente ajudavam a área de negócio a decidir
+Isso me ajuda muito na Cloud porque eu sei o que a infraestrutura precisa entregar pra quem trabalha com dados. Eu já estive do outro lado pedindo acesso, pedindo mais CPU, pedindo storage. Agora eu sei como fazer.
 
----
+## O que vem agora
 
-### 🔐 Cloud Security & Observabilidade
+[x] AWS re/Start — quase lá
+[ ] Certificação AWS Cloud Practitioner (em preparação)
+[x] Terraform nos labs que já fiz na mão - Concluindo Certificação - Quase lá
+[x] Primeiro projeto próprio: pipeline de dados 100% na AWS (S3 → Lambda → RDS → QuickSight)
+[x] Continuar documentando tudo aqui
 
-Tenho especial interesse em **Cloud Security, observabilidade e monitoramento de infraestrutura**.
+🌐 ## Vamos conversar?
 
-Venho desenvolvendo projetos utilizando serviços AWS para:
+Se você é recrutador, mentor ou alguém também fazendo essa transição, vamos trocar ideias.
 
-* Monitoramento
-* Logs
-* Alertas e notificações
-* Eventos
-* Compliance
-* Troubleshooting
-* Alta disponibilidade
+💼 LinkedIn: linkedin.com/in/eliana-diniz
+📧 E-mail: eliana.dinizsilva@gmail.com
 
----
-
-### 🚀 Projetos em destaque
-
-### AWS Infrastructure Observability
-
-Monitoramento e observabilidade de infraestrutura utilizando:
-
-**CloudWatch • EC2 • SNS • EventBridge • AWS Config**
-
-### AWS Auto Scaling Lab
-
-Implementação de **escalabilidade automática e alta disponibilidade** utilizando AWS.
-
-### AWS Storage Labs
-
-Laboratórios práticos utilizando:
-
-**Amazon S3 • Amazon EBS**
-
-### Projeto de Análise de Dados — Olist
-
-Pipeline de dados utilizando **Snowflake** e visualização de KPIs no **Power BI**.
-
----
-
-### 🎯 Minha trajetória
-
-### Analista de Dados → AWS Cloud → Cloud Engineer
-
-Atualmente:
-
-📚 Concluindo **AWS re/Start**
-
-🎓 Me preparando para a **certificação AWS**
-
-☁️ Aprofundando conhecimentos em **AWS Cloud**
-
-🏗️ Estudando **Terraform / Infrastructure as Code**
-
-📊 Utilizando minha experiência em **Python, SQL, Snowflake e Power BI**
-
-🔐 Explorando **Cloud Security e Observabilidade**
-
-🚀 Construindo projetos práticos para minha transição para **Cloud Engineering**
-
----
-
-### 🧰 Tecnologias
-
-**Cloud:** AWS
-
-**Infrastructure as Code:** Terraform
-
-**Programação:** Python
-
-**Dados:** SQL • Snowflake
-
-**BI & Visualização:** Power BI
-
-**AWS:** EC2 • S3 • EBS • IAM • VPC • CloudWatch • SNS • EventBridge • AWS Config
-
----
-
-### 🌐 Contatos
-
-💼 LinkedIn: [www.linkedin.com/in/eliana-diniz](http://www.linkedin.com/in/eliana-diniz)
-
-📧 E-mail: [eliana.dinizsilva@gmail.com](mailto:eliana.dinizsilva@gmail.com)
+"O console AWS não tem Ctrl+Z. Mas tem CloudTrail. E isso já é alguma coisa."
