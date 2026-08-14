@@ -114,8 +114,8 @@ Explorando Cloud Security e Observabilidade
 
 Construindo projetos práticos para minha transição para Cloud Engineering
 
-Tecnologias
 
+## Tecnologias
 
 Cloud: AWS, Infrastructure 
 Code: Terraform
@@ -126,7 +126,5 @@ BI & Visualização: Power BI
 AWS: EC2 • S3 • EBS • IAM • VPC • CloudWatch • SNS • EventBridge • AWS Config
 
 
-
 💼 LinkedIn: www.linkedin.com/in/eliana-diniz
-
 📧 E-mail: eliana.dinizsilva@gmail.com
