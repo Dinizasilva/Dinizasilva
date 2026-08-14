@@ -4,7 +4,7 @@
 
 <h2 align="center">👋 Sobre mim</h2>
 
-# 👋 Sobre mim
+
 
 Olá, sou **Eliana Diniz**.
 
