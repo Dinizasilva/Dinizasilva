@@ -6,6 +6,7 @@
 
 
 
+
 Olá, sou **Eliana Diniz**.
 
 Sou **Analista de Dados** com experiência em **Python, SQL, Snowflake e Power BI**, atualmente construindo minha transição profissional para **Cloud Engineering**.
@@ -16,9 +17,9 @@ Tenho interesse em construir soluções Cloud **seguras, escaláveis, resiliente
 
 ---
 
-## ☁️ Cloud & AWS
+### ☁️ Cloud & AWS
 
-Atualmente desenvolvendo conhecimentos práticos em:
+Atualmente, desenvolvo conhecimentos práticos em:
 
 * AWS
 * EC2
@@ -37,7 +38,7 @@ Atualmente desenvolvendo conhecimentos práticos em:
 
 ---
 
-## 🏗️ Infrastructure as Code
+### 🏗️ Infrastructure as Code
 
 Estou estudando **Terraform** para provisionamento e gerenciamento de infraestrutura como código.
 
@@ -47,7 +48,7 @@ Meu objetivo é desenvolver uma abordagem baseada em:
 
 ---
 
-## 📊 Dados & Analytics
+### 📊 Dados & Analytics
 
 Minha experiência profissional é construída sobre análise e interpretação de dados.
 
@@ -64,7 +65,7 @@ Essa experiência também fortalece minha transição para Cloud, especialmente 
 
 ---
 
-## 🔐 Cloud Security & Observabilidade
+### 🔐 Cloud Security & Observabilidade
 
 Tenho especial interesse em **Cloud Security, observabilidade e monitoramento de infraestrutura**.
 
@@ -80,7 +81,7 @@ Venho desenvolvendo projetos utilizando serviços AWS para:
 
 ---
 
-## 🚀 Projetos em destaque
+### 🚀 Projetos em destaque
 
 ### AWS Infrastructure Observability
 
@@ -104,7 +105,7 @@ Pipeline de dados utilizando **Snowflake** e visualização de KPIs no **Power B
 
 ---
 
-## 🎯 Minha trajetória
+### 🎯 Minha trajetória
 
 ### Analista de Dados → AWS Cloud → Cloud Engineer
 
@@ -126,7 +127,7 @@ Atualmente:
 
 ---
 
-## 🧰 Tecnologias
+### 🧰 Tecnologias
 
 **Cloud:** AWS
 
@@ -142,7 +143,7 @@ Atualmente:
 
 ---
 
-## 🌐 Contatos
+### 🌐 Contatos
 
 💼 LinkedIn: [www.linkedin.com/in/eliana-diniz](http://www.linkedin.com/in/eliana-diniz)
 
