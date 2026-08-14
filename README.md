@@ -121,12 +121,18 @@ Construindo projetos práticos para minha transição para Cloud Engineering
 ## Tecnologias
 
 
-Cloud: AWS, Infrastructure 
-Code: Terraform
-Programação: Python
-Dados: SQL • Snowflake
-BI & Visualização: Power BI
-AWS: EC2 • S3 • EBS • IAM • VPC • CloudWatch • SNS • EventBridge • AWS Config
+Cloud: 
+AWS, Infrastructure 
+Code: 
+Terraform
+Programação: 
+Python
+Dados: 
+SQL • Snowflake
+BI & Visualização: 
+Power BI
+AWS: 
+EC2 • S3 • EBS • IAM • VPC • CloudWatch • SNS • EventBridge • AWS Config
 
 
 
