@@ -130,5 +130,7 @@ AWS: EC2 • S3 • EBS • IAM • VPC • CloudWatch • SNS • EventBridge �
 
 
 
+
 💼 LinkedIn: www.linkedin.com/in/eliana-diniz
+
 📧 E-mail: eliana.dinizsilva@gmail.com
