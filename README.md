@@ -7,6 +7,16 @@
 Analista de Dados → Cloud Engineering
 Finalizando AWS re/Start e me preparando pra certificação
 
+Analista de Dados → Cloud Engineering
+Finalizando AWS re/Start e me preparando pra certificação
+https://aws.amazon.com/
+https://www.python.org/
+https://www.terraform.io/
+https://dev.mysql.com/doc/
+https://www.snowflake.com/
+https://powerbi.microsoft.com/
+</div>
+
 
 
 
