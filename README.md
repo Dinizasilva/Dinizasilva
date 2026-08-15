@@ -41,7 +41,7 @@ https://dev.mysql.com/doc/
 https://www.snowflake.com/
 https://powerbi.microsoft.com/
 </div>
-
+ 
 ## Lab: EC2 + EBS + Snapshots
 
 O que fiz: Subi uma instância EC2 na região us-east-1, anexei um volume EBS, configurei snapshots automáticos e testei recuperação de dados após "simular" uma falha (li o volume errado de propósito — aprendi na marra).
