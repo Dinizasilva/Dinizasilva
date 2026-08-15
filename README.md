@@ -32,16 +32,7 @@ Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutu
 ## Meus laboratórios práticos na AWS (O que eu já fiz de verdade).
 Não é teoria. É console aberto, instância subindo, erro aparecendo e eu resolvendo.
 
-Analista de Dados → Cloud Engineering
-Finalizando AWS re/Start e me preparando pra certificação
-https://aws.amazon.com/
-https://www.python.org/
-https://www.terraform.io/
-https://dev.mysql.com/doc/
-https://www.snowflake.com/
-https://powerbi.microsoft.com/
-</div>
- 
+
 ## Lab: EC2 + EBS + Snapshots
 
 O que fiz: Subi uma instância EC2 na região us-east-1, anexei um volume EBS, configurei snapshots automáticos e testei recuperação de dados após "simular" uma falha (li o volume errado de propósito — aprendi na marra).
