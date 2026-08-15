@@ -29,7 +29,7 @@ Trabalhei anos com dados — Python, SQL, Snowflake, Power BI. Sempre que precis
 Então entrei no AWS re/Start. E aqui estou, no final do curso, com as mãos sujas de console AWS, quebrando a cabeça com IAM policies e finalmente entendendo por que aquele Security Group não deixava a porta 22 abrir.
 Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutura Cloud. Construir coisas que funcionem, que sejam seguras e que eu sabia exatamente como montar do zero.
 
-## O que eu já fiz na AWS (de verdade)
+## Meus laboratórios práticos na AWS (O que eu já fiz de verdade).
 Não é teoria. É console aberto, instância subindo, erro aparecendo e eu resolvendo.
 
 ## Lab: EC2 + EBS + Snapshots
