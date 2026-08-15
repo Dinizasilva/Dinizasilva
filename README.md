@@ -32,6 +32,16 @@ Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutu
 ## Meus laboratórios práticos na AWS (O que eu já fiz de verdade).
 Não é teoria. É console aberto, instância subindo, erro aparecendo e eu resolvendo.
 
+Analista de Dados → Cloud Engineering
+Finalizando AWS re/Start e me preparando pra certificação
+https://aws.amazon.com/
+https://www.python.org/
+https://www.terraform.io/
+https://dev.mysql.com/doc/
+https://www.snowflake.com/
+https://powerbi.microsoft.com/
+</div>
+
 ## Lab: EC2 + EBS + Snapshots
 
 O que fiz: Subi uma instância EC2 na região us-east-1, anexei um volume EBS, configurei snapshots automáticos e testei recuperação de dados após "simular" uma falha (li o volume errado de propósito — aprendi na marra).
@@ -82,7 +92,8 @@ Antes de tudo isso, eu já trabalhava com:
 Python — automação de ETL, scripts de limpeza, análise exploratória
 SQL — consultas complexas, otimização de queries, modelagem dimensional
 Snowflake — data warehousing, pipelines, gestão de custos de compute
-Power BI — dashboards que realmente ajudavam a área de negócio a decidir
+Power BI — dashboards que realmente ajudavam a área de negócio a decidir.
+
 Isso me ajuda muito na Cloud porque eu sei o que a infraestrutura precisa entregar pra quem trabalha com dados. Eu já estive do outro lado pedindo acesso, pedindo mais CPU, pedindo storage. Agora eu sei como fazer.
 
 ## O que vem agora
