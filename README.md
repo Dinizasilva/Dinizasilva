@@ -3,7 +3,9 @@
 </p>
 
 <div align="center">
+  
 👋 E aí, sou a Eliana
+  
 Analista de Dados → Cloud Engineering
 Finalizando AWS re/Start e me preparando pra certificação
 
