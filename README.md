@@ -15,67 +15,123 @@ https://www.terraform.io/
 https://dev.mysql.com/doc/
 https://www.snowflake.com/
 https://powerbi.microsoft.com/
-</div>
-
-
-
-
 
 </div>
+
+
 
 ## Sobre essa transição
 
 Trabalhei anos com dados — Python, SQL, Snowflake, Power BI. Sempre que precisava de uma infraestrutura nova, tinha que esperar alguém provisionar. Foi aí que pensei: "por que eu mesma não aprendo a fazer isso?"
 Então entrei no AWS re/Start. E aqui estou, no final do curso, com as mãos sujas de console AWS, quebrando a cabeça com IAM policies e finalmente entendendo por que aquele Security Group não deixava a porta 22 abrir.
-Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutura Cloud. Construir coisas que funcionem, que sejam seguras e que eu sabia exatamente como montar do zero.
+Minha ideia é simples: usar tudo que aprendi em dados e juntar com infraestrutura Cloud. Construir coisas que funcionem, que sejam seguras e que eu saiba exatamente como montar do zero.
+
+
+### Meu projeto principal — Olist
+
+Esse não é um lab. Esse é o resultado de meses de construção, de tudo que eu estudei, de tudo que conheci em tecnologia. Foram muitas noites, tantos erros para reparar, e aqui cheguei.
+
+Pipeline de Dados — E-commerce Olist
+
+Arquitetura Medallion (Bronze → Silver → Gold) no Snowflake, transformações em SQL, visualização de KPIs no Power BI. Meu primeiro projeto de dados. A base de tudo.
+
+### O que tem lá:
+
+* Ingestão de dados brutos de e-commerce
+* Limpeza, padronização e modelagem dimensional
+* Dashboard com KPIs de negócio: volume de pedidos, ticket médio, distribuição geográfica, tempo de entrega
+* Documentação técnica completa
+* Por que isso importa pra Cloud:
+* Esse pipeline hoje roda no Snowflake. Mas eu já sei como levar ele pra AWS: S3 (Bronze), Lambda/Glue (Silver), Redshift (Gold), QuickSight (dashboards). O que eu construí em dados, eu vou reconstruir em Cloud.
+
+Ver projeto: https://github.com/Dinizasilva/projeto-analise-dados-olist
+
 
 ## Meus laboratórios práticos na AWS (O que eu já fiz de verdade).
 Não é teoria. É console aberto, instância subindo, erro aparecendo e eu resolvendo.
 
+### Lab: S3 Static Website Hosting
 
-## Lab: EC2 + EBS + Snapshots
+O que fiz: Hospedei um site estático (HTML) direto no S3, sem servidor, sem EC2.
 
-O que fiz: Subi uma instância EC2 na região us-east-1, anexei um volume EBS, configurei snapshots automáticos e testei recuperação de dados após "simular" uma falha (li o volume errado de propósito — aprendi na marra).
-Serviços: EC2 | EBS | IAM (role para acesso ao S3)
-O que deu errado: Esqueci de adicionar a role de IAM na instância antes de subir. Tive que criar outra. Agora eu leio duas vezes antes de clicar em "Launch".
+Serviços: S3 | Bucket Policy | Static Website Hosting | HTML/CSS
 
-## Lab: VPC, Subnets e Security Groups
-O que fiz: Criei uma VPC do zero com subnets pública e privada. Configurei um Security Group que só permite SSH da minha máquina (IP específico, não 0.0.0.0/0 — aprendi que isso é burrice logo no primeiro dia).
-Serviços: VPC | Subnets | Route Tables | Internet Gateway | Security Groups
-O que deu errado: A instância na subnet privada não tinha acesso à internet. Demorei 40 minutos pra perceber que a Route Table não estava associada. Foi um tapa na cara que me ensinou mais do que qualquer slide.
+O que deu errado: Tudo. O nome do bucket que eu queria já existia (nomes S3 são únicos globalmente). A opção de Static Website Hosting estava escondida nas propriedades do bucket — não é um tab, é uma seção lá embaixo. 
 
-## Lab: Observabilidade com CloudWatch + SNS + EventBridge
+As permissões IAM pareciam não se encontrar: Block Public Access desativado, Bucket Policy aplicada, e ainda assim AccessDenied. 
+Descobri que o ambiente do lab tinha uma SCP (Service Control Policy) no nível da conta bloqueando acesso público. 
+Os links no HTML quebravam porque usei caminhos relativos (./about.html) que funcionam no PC mas não no endpoint s3-website. 
+Refiz o HTML com caminhos simples (about.html). Deletei tudo e refiz do zero. 
+Na segunda vez, funcionou de primeira.
+
+Ver lab: github.com/Dinizasilva/AWS-S3-Static-Website-Hosting-Lab
+
+### Lab: Observabilidade com CloudWatch + SNS + EventBridge
 
 O que fiz: Configurei métricas no CloudWatch para monitorar CPU de duas instâncias EC2. Criei alarmes que disparam notificações por SNS (e-mail) quando a CPU passa de 80%. Usei EventBridge para capturar eventos de parada/terminação de instâncias.
-Serviços: CloudWatch | SNS | EventBridge | EC2
-O que deu errado: O alarme do CloudWatch não disparava. Descobri que a métrica estava configurada para "Average" em 5 minutos, mas eu estava fazendo o teste em 30 segundos. Mudei para "High Resolution" e funcionou. Detalhe mata.
 
-## Lab: S3 — Versionamento, Lifecycle e Políticas
+Serviços: CloudWatch | CloudWatch Logs | SNS | EventBridge | EC2 | AWS Config
 
-O que fiz: Criei buckets com versionamento ativado, configurei políticas de lifecycle para mover objetos antigos para Glacier e bloqueei acesso público com Bucket Policies. Testei upload, download e recuperação de versões antigas.
-Serviços: S3 | IAM | AWS Config
-O que deu errado: Tentei acessar um objeto privado pela URL pública. Obviamente deu 403. Foi aí que entendi a diferença entre ACL, Bucket Policy e IAM Policy na prática.
+O que deu errado: O CloudWatch Agent tava "ativo" mas não enviava logs. Verifiquei permissões do arquivo (access_log) — tava certo. 
+Mas o diretório pai (/var/log/httpd) tava com drwx------ e grupo root. O agente roda como cwagent e nem conseguia entrar no diretório. 
+sudo chgrp cwagent /var/log/httpd e sudo chmod 750 resolveram. 
+Também tentei ver os Configuration Recorders no AWS Config e tomei AccessDenied por causa de uma política Deny explícita no lab. 
+Me forçou a lembrar: Deny sempre vence Allow.
 
-## Lab: Auto Scaling + Alta Disponibilidade
+Ver lab: github.com/Dinizasilva/aws-infrastructure-observability
+
+### Lab: Auto Scaling + Alta Disponibilidade
 
 O que fiz: Configurei um Auto Scaling Group com Launch Template, defini políticas de escala baseadas em CPU e distribuí as instâncias em múltiplas Availability Zones. Testei o stress da aplicação e vi as instâncias subirem sozinhas.
-Serviços: EC2 Auto Scaling | CloudWatch | ALB | VPC
-O que deu errado: O Load Balancer não distribuía o tráfego. As instâncias estavam em subnets privadas sem NAT Gateway. O health check falhava e o ASG ficava criando e destruindo instâncias em loop. Pânico por 20 minutos, depois paz.
 
-## Lab: Cloud Security e Compliance (AWS Config)
+Serviços: EC2 Auto Scaling | ALB | CloudWatch | VPC
 
-O que fiz: Ativei o AWS Config para monitorar conformidade dos recursos. Criei regras para verificar se buckets S3 estão criptografados, se Security Groups não têm portas abertas demais e se EBS volumes estão criptografados.
-Serviços: AWS Config | CloudTrail | IAM
-O que aprendi: Compliance não é só "clicar em enable". Você precisa entender o que está sendo monitorado e por quê. Criei um dashboard no Config para visualizar recursos não conformes de um jeito só meu.
+O que deu errado: O Load Balancer não distribuía o tráfego. As instâncias estavam em subnets privadas sem NAT Gateway. 
+O health check falhava e o ASG ficava criando e destruindo instâncias em loop. Pânico por 20 minutos. 
+O gráfico do CloudWatch parecia batimento cardíaco descontrolado. 
+Mudei as instâncias pra subnets públicas (ou adicionei NAT Gateway), o health check passou, o loop parou. 
+Depois rodei stress --cpu 2 --timeout 300 e vi o ASG criar a 3ª e 4ª instância em menos de 5 minutos.
 
-## Infrastructure as Code
+Ver lab: github.com/Dinizasilva/AWS-Auto-Scaling-lab
 
-Estou começando a traduzir esses labs para Terraform. A ideia é: se eu consigo criar no console, eu consigo criar em código.
+### Lab: CloudFormation — Infrastructure as Code
+
+O que fiz: Escrevi uma infraestrutura inteira em YAML: VPC, Subnet, Security Group, EC2, S3. Cliquei em "Create Stack" e vi o AWS criar tudo sozinho. 
+Depois fiz UPDATE pra adicionar um S3 sem derrubar nada. No final, deletei tudo com um clique.
+
+Serviços: CloudFormation | YAML | EC2 | VPC | S3 | IAM | Systems Manager Parameter Store
+
+O que deu errado: Na verdade, nada quebrou nesse lab — o que me assustou foi o DELETE. Fiquei com medo de deixar recurso órfão. 
+Mas o CloudFormation rastreia dependências e deleta na ordem certa. 
+Também aprendi a usar o Parameter Store pra buscar AMI ID dinamicamente em vez de hardcodar. 
+AMI IDs mudam de região pra região. Hardcodar é pedir pra quebrar.
+
+Ver lab: github.com/Dinizasilva/AWS-CloudFormation-Infrastructure-as-Code-Cloud-Infrastructure-Automation
+
+
+### Infrastructure as Code
+
+Estou traduzindo esses labs para Terraform. 
+
+A ideia é: se eu consigo criar no console, eu consigo criar em código.
+
 O que já estou fazendo:
-Módulos básicos de EC2 + VPC
-Variáveis e outputs organizados
-State remoto no S3 (com locking no DynamoDB — porque aprendi que perder state é perder tudo)
-Repositório de Terraform em construção 🚧
+
+* Módulos básicos de EC2 + VPC
+* Variáveis e outputs organizados
+* State remoto no S3 (com locking no DynamoDB — porque aprendi que perder state é perder tudo)
+* Repositório de Terraform em construção 🚧
+
+
+### O que vem agora
+
+[x] Pipeline de dados Olist — concluído
+[x] AWS re/Start — concluído
+[ ] Certificação AWS Cloud Practitioner (em preparação)
+[ ] Terraform nos labs que já fiz na mão
+[ ] Migrar o pipeline Olist para AWS (S3 → Lambda → Redshift → QuickSight)
+[ ] Continuar documentando tudo aqui
+
 
 ## A bagagem que eu trago de Dados
 
@@ -85,15 +141,6 @@ SQL — consultas complexas, otimização de queries, modelagem dimensional
 Snowflake — data warehousing, pipelines, gestão de custos de compute
 Power BI — dashboards que realmente ajudavam a área de negócio a decidir.
 
-Isso me ajuda muito na Cloud porque eu sei o que a infraestrutura precisa entregar pra quem trabalha com dados. Eu já estive do outro lado pedindo acesso, pedindo mais CPU, pedindo storage. Agora eu sei como fazer.
-
-## O que vem agora
-
-[x] AWS re/Start — quase lá
-[ ] Certificação AWS Cloud Practitioner (em preparação)
-[x] Terraform nos labs que já fiz na mão - Concluindo Certificação - Quase lá
-[x] Primeiro projeto próprio: pipeline de dados 100% na AWS (S3 → Lambda → RDS → QuickSight)
-[x] Continuar documentando tudo aqui
 
 🌐 ## Vamos conversar?
 
