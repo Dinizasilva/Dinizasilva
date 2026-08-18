@@ -2,9 +2,8 @@
 <img src="https://raw.githubusercontent.com/Dinizasilva/Dinizasilva/main/IMG_9953.PNG" alt="Banner Eliana Diniz" width="550">
 </p>
 
-<div align="center">
   
-# 👋 E aí, sou a Eliana
+## 👋 E aí, sou a Eliana
 
 **Analista de Dados → Cloud Engineering**
 AWS re/Start (Escola da Nuvem) concluído · Certificação AWS Cloud Practitioner — prova agendada para **setembro/2026**
