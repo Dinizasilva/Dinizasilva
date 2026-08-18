@@ -54,7 +54,7 @@ Não é teoria. É console aberto, instância subindo, erro aparecendo — e eu 
 
 **O que deu errado:** o nome do bucket que eu queria já existia (nomes S3 são únicos globalmente). A opção de Static Website Hosting estava escondida nas propriedades do bucket. As permissões IAM pareciam corretas — Block Public Access desativado, Bucket Policy aplicada — e mesmo assim `AccessDenied`. Descobri uma SCP (Service Control Policy) no nível da conta bloqueando acesso público. Os links também quebravam por causa de caminhos relativos que não funcionam no endpoint `s3-website`. Refiz com caminhos simples e funcionou de primeira.
 
-🔗 [Ver lab](https://github.com/Dinizasilva/AWS-S3-Static-Website-Hosting-Lab)
+[Ver lab](https://github.com/Dinizasilva/AWS-S3-Static-Website-Hosting-Lab)
 
 ### Lab: Observabilidade — CloudWatch + SNS + EventBridge
 **O que fiz:** configurei métricas no CloudWatch para monitorar CPU de duas instâncias EC2, alarmes disparando notificações por SNS quando a CPU passa de 80%, e EventBridge capturando eventos de parada/terminação de instâncias.
