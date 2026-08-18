@@ -70,7 +70,7 @@ Não é teoria. É console aberto, instância subindo, erro aparecendo — e eu 
 
 **O que deu errado:** o Load Balancer não distribuía tráfego porque as instâncias estavam em subnets privadas sem NAT Gateway. O health check falhava e o ASG entrava em loop de criar/destruir instâncias. Movi as instâncias para subnets públicas (e adicionei NAT Gateway), o health check passou. Depois rodei `stress --cpu 2 --timeout 300` e vi o ASG criar a 3ª e 4ª instância em menos de 5 minutos.
 
-🔗 [Ver lab](https://github.com/Dinizasilva/AWS-Auto-Scaling)
+[Ver lab](https://github.com/Dinizasilva/AWS-Auto-Scaling)
 
 ### Lab: CloudFormation — Infrastructure as Code
 **O que fiz:** escrevi uma infraestrutura inteira em YAML (VPC, Subnet, Security Group, EC2, S3), fiz UPDATE para adicionar recursos sem derrubar nada, e deletei tudo com um clique no final.
@@ -82,7 +82,7 @@ Não é teoria. É console aberto, instância subindo, erro aparecendo — e eu 
 
 ---
 
-## 🏗️ Infrastructure as Code
+### Infrastructure as Code
 
 Traduzindo esses labs para Terraform — se eu consigo criar no console, eu consigo criar em código.
 
@@ -92,7 +92,7 @@ Traduzindo esses labs para Terraform — se eu consigo criar no console, eu cons
 
 ---
 
-## Próximos passos declarados
+### Próximos passos declarados
 
 - [x] Pipeline de dados Olist — concluído
 - [x] AWS re/Start (Escola da Nuvem) — concluído
@@ -105,7 +105,7 @@ Traduzindo esses labs para Terraform — se eu consigo criar no console, eu cons
 
 ---
 
-## A bagagem que eu trago de Dados
+### A bagagem que eu trago de Dados
 
 - **Python** — automação de ETL, scripts de limpeza, análise exploratória
 - **SQL** — consultas complexas, otimização de queries, modelagem dimensional
@@ -114,7 +114,7 @@ Traduzindo esses labs para Terraform — se eu consigo criar no console, eu cons
 
 ---
 
-## Vamos conversar?
+### Vamos conversar?
 
 Se você é recrutador, mentor ou alguém também fazendo essa transição, vamos trocar ideias.
 
